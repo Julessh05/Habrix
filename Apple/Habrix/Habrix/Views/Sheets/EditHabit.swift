@@ -1,14 +1,16 @@
 //
-//  AddHabit.swift
+//  EditHabit.swift
 //  Habrix
 //
-//  Created by Julian Schumacher on 01.10.25.
+//  Created as AddHabit.swift by Julian Schumacher on 01.10.25.
+//
+//  Renamed to EditHabit.swift by Julian Schumacher on 11.10.25
 //
 
 import SwiftUI
 import SwiftData
 
-internal struct AddHabit: View {
+internal struct EditHabit: View {
 
     @Environment(\.dismiss) private var dismiss
 
@@ -16,15 +18,15 @@ internal struct AddHabit: View {
 
     @Query private var categories: [Category]
 
-    @State private var name : String = ""
+    @State private var name : String
 
-    @State private var description : String = ""
+    @State private var description : String
 
-    @State private var iconName : String = "figure.walk"
+    @State private var iconName : String
 
-    @State private var frequency : Frequency = .monthly
+    @State private var frequency : Frequency
 
-    @State private var category : Category = Category.empty
+    @State private var category : Category
 
     @State private var iconPickerShown : Bool = false
 
@@ -32,9 +34,39 @@ internal struct AddHabit: View {
 
     @State private var startDate : Date = Date.now
 
-    @State private var useEndDate : Bool = false
+    @State private var useEndDate : Bool
 
-    @State private var endDate : Date = Calendar.current.date(byAdding: .year, value: 1, to: Date.now)!
+    @State private var endDate : Date
+
+    @State private var editMode : Bool
+
+    private let habit : Habit?
+
+    internal init() {
+        name = ""
+        description = ""
+        iconName = "figure.walk"
+        frequency = .monthly
+        category = Category.empty
+        startDate = Date.now
+        useEndDate = false
+        endDate = Calendar.current.date(byAdding: .year, value: 1, to: Date.now)!
+        editMode = false
+        habit = nil
+    }
+
+    internal init(_ habit : Habit) {
+        name = habit.name
+        description = habit.habitDescription ?? ""
+        iconName = habit.iconName
+        frequency = habit.frequency
+        category = habit.category ?? Category.empty
+        startDate = habit.startDate
+        useEndDate = habit.endDate != nil
+        endDate = habit.endDate ?? Calendar.current.date(byAdding: .year, value: 1, to: Date.now)!
+        editMode = true
+        self.habit = habit
+    }
 
     var body: some View {
         NavigationStack {
@@ -216,7 +248,7 @@ internal struct AddHabit: View {
                 }
             }
 #if os(iOS)
-            .navigationTitle("Add Habit")
+            .navigationTitle(editMode ? "Edit \(habit!.name)" : "Add Habit")
             .navigationBarTitleDisplayMode(.automatic)
 #endif
         }
@@ -242,6 +274,38 @@ internal struct AddHabit: View {
     }
 }
 
-#Preview {
-    AddHabit()
+#Preview("Add new habit") {
+    EditHabit()
+}
+
+#Preview("Edit minimal habit") {
+    var habit : Habit = Habit(
+        name: "Test",
+        iconName: "figure.walk",
+        frequency: .monthly
+    )
+
+    EditHabit(habit)
+}
+
+#Preview("Edit ended habit") {
+    var habit : Habit = Habit(
+        name: "Test",
+        iconName: "figure.walk",
+        frequency: .monthly,
+        endDate: Date.distantFuture,
+    )
+
+    EditHabit(habit)
+}
+
+#Preview("Edit habit w/ discription") {
+    var habit : Habit = Habit(
+        name: "Test",
+        iconName: "figure.walk",
+        frequency: .monthly,
+        description: "Test description"
+    )
+
+    EditHabit(habit)
 }

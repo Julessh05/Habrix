@@ -70,7 +70,7 @@ struct Home: View {
                     .padding(16)
                     .glassEffect(.regular)
                     .popover(isPresented: $addShown) {
-                        AddHabit()
+                        EditHabit()
                     }
                 }
             }
