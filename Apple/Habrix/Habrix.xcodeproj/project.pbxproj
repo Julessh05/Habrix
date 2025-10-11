@@ -6,6 +6,10 @@
 	objectVersion = 90;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		84749C6E2E966CAB002DEE92 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = 84749C6D2E966CAB002DEE92 /* Documentation.docc */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		84C259AE2E9040910051D5A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84749C6D2E966CAB002DEE92 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		84C2599C2E9040900051D5A9 /* Habrix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habrix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C259AD2E9040910051D5A9 /* HabrixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabrixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C259B72E9040910051D5A9 /* HabrixUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabrixUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				84C2599E2E9040900051D5A9 /* Habrix */,
+				84749C6D2E966CAB002DEE92 /* Documentation.docc */,
 				84C259B02E9040910051D5A9 /* HabrixTests */,
 				84C259BA2E9040910051D5A9 /* HabrixUITests */,
 				84C2599D2E9040900051D5A9 /* Products */,
@@ -228,6 +234,7 @@
 		84C259982E9040900051D5A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				84749C6E2E966CAB002DEE92 /* Documentation.docc in Sources */,
 			);
 		};
 		84C259A92E9040910051D5A9 /* Sources */ = {

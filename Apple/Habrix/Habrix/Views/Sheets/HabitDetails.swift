@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HabitDetails: View {
 
+    @Environment(\.dismiss) private var dismiss
+
     @Binding internal var habit : Habit?
 
     private static let loadingTag : String = "Loading..."
@@ -18,6 +20,11 @@ struct HabitDetails: View {
             List {
                 Section {
                     detailsRow(text: "Name", value: habit?.name ?? HabitDetails.loadingTag)
+                    VStack(alignment: .leading) {
+                        Text("Description")
+                        Text(habit?.habitDescription ?? "No description provided")
+                            .foregroundStyle(.gray)
+                    }
                 } header: {
                     Text("Details")
                 }
@@ -47,9 +54,18 @@ struct HabitDetails: View {
                 }
             }
             #if os(iOS)
-            .navigationTitle(habit?.name ?? "Error")
+            .navigationTitle(habit?.name ?? HabitDetails.loadingTag)
             .navigationBarTitleDisplayMode(.automatic)
             #endif
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(role: .close) {
+                        dismiss()
+                    } label: {
+                        Label("Cancel", systemImage: "xmark")
+                    }
+                }
+            }
         }
     }
 

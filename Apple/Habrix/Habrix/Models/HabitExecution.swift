@@ -15,8 +15,14 @@ internal final class HabitExecution {
 
     internal var habit : Habit
 
+    internal var isCompleted : Bool = false
+
     internal init(timestamp : Date, habit : Habit) {
         self.timestamp = timestamp
         self.habit = habit
+    }
+
+    internal func markAsDone() {
+        isCompleted = true
     }
 }

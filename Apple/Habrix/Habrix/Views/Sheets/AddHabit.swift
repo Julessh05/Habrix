@@ -18,6 +18,8 @@ internal struct AddHabit: View {
 
     @State private var name : String = ""
 
+    @State private var description : String = ""
+
     @State private var iconName : String = "figure.walk"
 
     @State private var frequency : Frequency = .monthly
@@ -32,7 +34,7 @@ internal struct AddHabit: View {
 
     @State private var useEndDate : Bool = false
 
-    @State private var endDate : Date = Date.distantFuture
+    @State private var endDate : Date = Calendar.current.date(byAdding: .year, value: 1, to: Date.now)!
 
     var body: some View {
         NavigationStack {
@@ -57,6 +59,9 @@ internal struct AddHabit: View {
                         .popover(isPresented: $iconPickerShown) {
                             IconPicker(iconName: $iconName)
                         }
+                        TextField("Description", text: $description, axis: .vertical)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(3...5)
                     } header: {
                         Text("General Data")
                     }
@@ -222,7 +227,17 @@ internal struct AddHabit: View {
             nameEmptyDialogShown.toggle()
             return
         }
-        modelContext.insert(Habit(name: name, iconName: iconName, frequency: frequency))
+        let habit = Habit(
+            name: name,
+            iconName: iconName,
+            frequency: frequency,
+            startDate: startDate,
+            endDate: useEndDate ? endDate : nil,
+            category: category,
+            description: description.isEmpty ? nil : description
+        )
+        modelContext.insert(habit)
+        HabitHelper.createExecusions(habit, modelContext: modelContext)
         dismiss()
     }
 }
