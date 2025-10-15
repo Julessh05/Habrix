@@ -15,7 +15,7 @@ internal final class HabitExecution {
 
     internal var habit : Habit
 
-    internal var isCompleted : Bool = false
+    @Attribute(.allowsCloudEncryption) internal var isCompleted : Bool = false
 
     internal init(timestamp : Date, habit : Habit) {
         self.timestamp = timestamp
@@ -24,5 +24,9 @@ internal final class HabitExecution {
 
     internal func markAsDone() {
         isCompleted = true
+    }
+
+    internal func markAsUndone() {
+        isCompleted = false
     }
 }

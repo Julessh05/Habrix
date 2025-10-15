@@ -40,7 +40,7 @@ internal struct EditHabit: View {
 
     @State private var editMode : Bool
 
-    private let habit : Habit?
+    private let habit : Binding<Habit?>
 
     internal init() {
         name = ""
@@ -52,18 +52,21 @@ internal struct EditHabit: View {
         useEndDate = false
         endDate = Calendar.current.date(byAdding: .year, value: 1, to: Date.now)!
         editMode = false
-        habit = nil
+        habit = .constant(nil)
     }
 
-    internal init(_ habit : Habit) {
-        name = habit.name
-        description = habit.habitDescription ?? ""
-        iconName = habit.iconName
-        frequency = habit.frequency
-        category = habit.category ?? Category.empty
-        startDate = habit.startDate
-        useEndDate = habit.endDate != nil
-        endDate = habit.endDate ?? Calendar.current.date(byAdding: .year, value: 1, to: Date.now)!
+    internal init(_ habit : Binding<Habit?>) {
+        guard let internalHabit = habit.wrappedValue else {
+            exit(1)
+        }
+        name = internalHabit.name
+        description = internalHabit.habitDescription ?? ""
+        iconName = internalHabit.iconName
+        frequency = internalHabit.frequency
+        category = internalHabit.category ?? Category.empty
+        startDate = internalHabit.startDate
+        useEndDate = internalHabit.endDate != nil
+        endDate = internalHabit.endDate ?? Calendar.current.date(byAdding: .year, value: 1, to: Date.now)!
         editMode = true
         self.habit = habit
     }
@@ -98,10 +101,10 @@ internal struct EditHabit: View {
                         Text("General Data")
                     }
                     Section {
-                        DatePicker("Start", selection: $startDate, displayedComponents: .date)
+                        DatePicker("Start", selection: $startDate, displayedComponents: [.date, .hourAndMinute])
                         Toggle("End on some date", isOn: $useEndDate)
                         if (useEndDate) {
-                            DatePicker("End", selection: $endDate, displayedComponents: .date)
+                            DatePicker("End", selection: $endDate, displayedComponents: [.date, .hourAndMinute])
                         }
                     } header: {
                         Text("Time")
@@ -109,35 +112,6 @@ internal struct EditHabit: View {
                         Text("If no end date is set, the habit will always renew until manually stopped or deleted.")
                     }
                     .datePickerStyle(.automatic)
-//                    Section {
-//                        Picker(selection: $category) {
-//                            Text("None").tag(Category.empty)
-//                            Divider()
-//                            ForEach(categories) {
-//                                cat in
-//                                Text(cat.name)
-//                            }
-//                            Divider()
-//                            Button {
-//                                // TODO: implement button (if possible)
-//                            } label: {
-//                                Label("Add new category", systemImage: "plus")
-//                            }
-//                        } label: {
-//                            Label("Category", systemImage: "tag")
-//                        }
-//                    } header: {
-//                        Text("Customization")
-//                    } footer: {
-//                        VStack(alignment: .leading) {
-//                            Text("Furthermore configure your habit to personal preferences")
-//                            HStack {
-//                                Text("You can add this habit to a category or")
-//                                Text("Create a new one")
-//                                Text(".")
-//                            }
-//                        }
-//                    }
                 }
                 VStack {
                     Spacer()
@@ -145,93 +119,15 @@ internal struct EditHabit: View {
                         done()
                     } label: {
                         Label("Add", systemImage: "plus")
+                            .padding(.vertical, 16)
+                            .padding(.horizontal, 128)
                     }
                     // TODO: either disabled or alert dialog on empty name
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 128)
                     .foregroundStyle(.foreground)
                     .glassEffect(.regular)
                 }
                 .ignoresSafeArea(.keyboard)
             }
-            //            VStack {
-            //                ZStack {
-            //                    LinearGradient(
-            //                        colors: [.pink.opacity(0.2), .blue.opacity(0.2)],
-            //                        startPoint: .topLeading,
-            //                        endPoint: .bottomTrailing
-            //                    )
-            //                    Button {
-            //                        iconPickerShown.toggle()
-            //                    } label: {
-            //                        Image(systemName: iconName)
-            //                            .resizable()
-            //                            .scaledToFit()
-            //                            .symbolColorRenderingMode(.gradient)
-            //                            .symbolRenderingMode(.hierarchical)
-            //                    }
-            //                    .foregroundStyle(.black)
-            //                    .padding(32)
-            //                    .popover(isPresented: $iconPickerShown) {
-            //                        IconPicker(iconName: $iconName)
-            //                    }
-            //                }
-            //                .frame(width: 196, height: 196)
-            //                .glassEffect(
-            //                    .clear.interactive(),
-            //                    in: RoundedRectangle(cornerSize: CGSize(width: 50, height: 50))
-            //                )
-            //                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 50, height: 50)))
-            //                .padding(.vertical, 64)
-            //                .padding(.horizontal, 32)
-            //                TextField("Name", text: $name)
-            //                    .padding(12)
-            //                    .backgroundStyle(.clear)
-            //                    .glassEffect(.regular.interactive())
-            //                    .padding(32)
-            //                    .alert("Empty name", isPresented: $nameEmptyDialogShown) {
-            //
-            //                    } message: {
-            //                        Text("An unnamed habit cannot be stored. Please enter a name")
-            //                    }
-            //                Picker(selection: $frequency) {
-            //                    ForEach(Frequency.allCases) {
-            //                        f in
-            //                        Text(String(describing: f)).tag(f)
-            //                    }
-            //                } label: {
-            //                    Label(String(describing: frequency), systemImage: "hourglass")
-            //                        .glassEffect()
-            //                }
-            //                .tint(.white)
-            //                Spacer()
-            //                Button {
-            //                    done()
-            //                } label: {
-            //                    Label("Add", systemImage: "plus")
-            //                }
-            //                // TODO: either disabled or alert dialog on empty name
-            //                .padding(.vertical, 16)
-            //                .padding(.horizontal, 128)
-            //                .foregroundStyle(.foreground)
-            //                .glassEffect(.regular)
-            //            }
-            //            .background {
-            //                MeshGradient(
-            //                    width: 2,
-            //                    height: 2,
-            //                    points: [
-            //                        [0, 0], [1, -0.3], [0, 1], [1, 1]
-            //                    ],
-            //                    colors: [
-            //                        .purple, .mint,
-            //                        .orange, .blue
-            //                    ],
-            //                )
-            //                .ignoresSafeArea()
-            //                .blur(radius: 15)
-            //                Color.black.opacity(0.3).ignoresSafeArea()
-            //            }
             .toolbarRole(.automatic)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -248,7 +144,7 @@ internal struct EditHabit: View {
                 }
             }
 #if os(iOS)
-            .navigationTitle(editMode ? "Edit \(habit!.name)" : "Add Habit")
+            .navigationTitle(editMode ? "Edit \(habit.wrappedValue?.name ?? "Unknown Habit")" : "Add Habit")
             .navigationBarTitleDisplayMode(.automatic)
 #endif
         }
@@ -259,17 +155,27 @@ internal struct EditHabit: View {
             nameEmptyDialogShown.toggle()
             return
         }
-        let habit = Habit(
+        let newHabit = Habit(
             name: name,
             iconName: iconName,
             frequency: frequency,
             startDate: startDate,
             endDate: useEndDate ? endDate : nil,
-            category: category,
+            // TODO: add category (error was that category should be unique)
+            category: nil,
             description: description.isEmpty ? nil : description
         )
-        modelContext.insert(habit)
-        HabitHelper.createExecusions(habit, modelContext: modelContext)
+        if habit.wrappedValue != nil {
+            habit.wrappedValue = newHabit
+            do {
+                try modelContext.save()
+            } catch _ {
+
+            }
+        } else {
+            modelContext.insert(newHabit)
+            HabitHelper.createExecusions(newHabit, modelContext: modelContext)
+        }
         dismiss()
     }
 }
@@ -279,33 +185,33 @@ internal struct EditHabit: View {
 }
 
 #Preview("Edit minimal habit") {
-    var habit : Habit = Habit(
+    @Previewable @State var habit : Habit? = Habit(
         name: "Test",
         iconName: "figure.walk",
         frequency: .monthly
     )
 
-    EditHabit(habit)
+    EditHabit($habit)
 }
 
 #Preview("Edit ended habit") {
-    var habit : Habit = Habit(
+    @Previewable @State var habit : Habit? = Habit(
         name: "Test",
         iconName: "figure.walk",
         frequency: .monthly,
         endDate: Date.distantFuture,
     )
 
-    EditHabit(habit)
+    EditHabit($habit)
 }
 
 #Preview("Edit habit w/ discription") {
-    var habit : Habit = Habit(
+    @Previewable @State var habit : Habit? = Habit(
         name: "Test",
         iconName: "figure.walk",
         frequency: .monthly,
         description: "Test description"
     )
 
-    EditHabit(habit)
+    EditHabit($habit)
 }

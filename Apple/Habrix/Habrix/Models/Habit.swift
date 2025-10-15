@@ -43,4 +43,8 @@ final class Habit {
         self.category = category
         self.habitDescription = description
     }
+
+    internal func getNextExecution() -> HabitExecution? {
+        executions.min(by: { $0.timestamp > Date.now && $1.timestamp > Date.now && $0.timestamp > $1.timestamp }) // All Dates in the future. On them, get the smallest element
+    }
 }
