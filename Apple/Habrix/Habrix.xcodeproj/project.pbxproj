@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		84749C6E2E966CAB002DEE92 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = 84749C6D2E966CAB002DEE92 /* Documentation.docc */; };
+		84749CA02E9FA100002DEE92 /* icons.json in Resources */ = {isa = PBXBuildFile; fileRef = 84749C9F2E9FA100002DEE92 /* icons.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		84749C6D2E966CAB002DEE92 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
+		84749C9E2E9FA100002DEE92 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/icons.json; sourceTree = "<group>"; };
+		84749CA12E9FA105002DEE92 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = de; path = de.lproj/icons.json; sourceTree = "<group>"; };
 		84C2599C2E9040900051D5A9 /* Habrix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habrix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C259AD2E9040910051D5A9 /* HabrixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabrixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C259B72E9040910051D5A9 /* HabrixUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabrixUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +90,7 @@
 		84C259932E9040900051D5A9 = {
 			isa = PBXGroup;
 			children = (
+				84749C9F2E9FA100002DEE92 /* icons.json */,
 				84C2599E2E9040900051D5A9 /* Habrix */,
 				84749C6D2E966CAB002DEE92 /* Documentation.docc */,
 				84C259B02E9040910051D5A9 /* HabrixTests */,
@@ -196,6 +200,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
 				Base,
 			);
 			mainGroup = 84C259932E9040900051D5A9;
@@ -216,6 +221,7 @@
 		84C2599A2E9040900051D5A9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
+				84749CA02E9FA100002DEE92 /* icons.json in Resources */,
 			);
 		};
 		84C259AB2E9040910051D5A9 /* Resources */ = {
@@ -261,6 +267,18 @@
 			targetProxy = 84C259B82E9040910051D5A9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		84749C9F2E9FA100002DEE92 /* icons.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84749C9E2E9FA100002DEE92 /* en */,
+				84749CA12E9FA105002DEE92 /* de */,
+			);
+			name = icons.json;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		84C259C12E9040910051D5A9 /* Debug configuration for PBXNativeTarget "Habrix" */ = {

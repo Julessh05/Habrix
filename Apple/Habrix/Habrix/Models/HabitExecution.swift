@@ -30,3 +30,19 @@ internal final class HabitExecution {
         isCompleted = false
     }
 }
+
+extension [Habit] {
+    internal func getNextExecutions() -> [Date : [HabitExecution]] {
+        var res : [Date : [HabitExecution]] = [:]
+        for habit in self {
+            if let nextExecution = habit.getNextExecution() {
+                let nextTimestamp = nextExecution.timestamp
+                if res[nextTimestamp] == nil {
+                    res[nextTimestamp] = []
+                }
+                res[nextTimestamp]!.append(nextExecution)
+            }
+        }
+        return res
+    }
+}

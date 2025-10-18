@@ -29,6 +29,10 @@ struct HabitDetails: View {
             List {
                 Section {
                     detailsRow(text: "Name", value: habit?.name ?? HabitDetails.loadingTag)
+                    detailsRow(
+                        text: "Frequency",
+                        value: habit?.frequency.rawValue.capitalized ?? HabitDetails.loadingTag
+                    )
                     VStack(alignment: .leading) {
                         Text("Description")
                         Text(habit?.habitDescription ?? "No description provided")

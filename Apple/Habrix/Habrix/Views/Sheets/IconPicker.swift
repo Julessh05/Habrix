@@ -13,100 +13,49 @@ internal struct IconPicker: View {
 
     @Binding internal var iconName : String
 
-    private let icons: [String] = [
-        "figure.walk",
-        "figure.walk.motion",
-        "figure.run",
-        "figure.american.football",
-        "figure.archery",
-        "figure.australian.football",
-        "figure.badminton",
-        "figure.barre",
-        "figure.baseball",
-        "figure.basketball",
-        "figure.bowling",
-        "figure.boxing",
-        "figure.climbing",
-        "figure.cooldown",
-        "figure.core.training",
-        "figure.cricket",
-        "figure.cross.training",
-        "figure.dance",
-        "figure.disc.sports",
-        "figure.skiing.downhill",
-        "figure.elliptical",
-        "figure.equestrian.sports",
-        "figure.fencing",
-        "figure.fishing",
-        "figure.strengthtraining.functional",
-        "figure.golf",
-        "figure.gymnastics",
-        "figure.hand.cycling",
-        "figure.handball",
-        "figure.highintensity.intervaltraining",
-        "figure.hiking",
-        "figure.hockey",
-        "figure.field.hockey",
-        "figure.ice.hockey",
-        "figure.hunting",
-        "figure.indoor.cycle",
-        "figure.jumprope",
-        "figure.kickboxing",
-        "figure.lacrosse",
-        "figure.martial.arts",
-        "figure.mind.and.body",
-        "figure.mixed.cardio",
-        "figure.open.water.swim",
-        "figure.outdoor.cycle",
-        "figure.pickleball",
-        "figure.pilates",
-        "figure.play",
-        "figure.pool.swim",
-        "figure.racquetball",
-        "figure.rolling",
-        "figure.indoor.rowing",
-        "figure.outdoor.rowing",
-        "figure.rugby",
-        "figure.sailing",
-        "figure.skateboarding",
-        "figure.ice.skating",
-        "figure.snowboarding",
-        "figure.indoor.soccer",
-        "figure.outdoor.soccer",
-        "figure.socialdance",
-        "figure.softball",
-        "figure.squash",
-        "figure.stair.stepper",
-        "figure.stairs",
-        "figure.step.training"
-    ]
+    @State private var icons : [String : [String]] = [:]
+
+    @State private var errLoadingIconsShown : Bool = false
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem(), GridItem()]) {
-                    ForEach(icons, id: \.self) {
-                        icon in
-                        Button {
-                            iconName = icon
-                            dismiss()
-                        } label: {
-                            Image(systemName: icon)
-                                .renderingMode(.original)
-                                .symbolRenderingMode(.hierarchical)
-                                .resizable()
-                                .scaledToFit()
-                                .padding(16)
+                LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem(), GridItem(), GridItem()]) {
+                    ForEach(Array(icons.keys).sorted(), id: \.self) {
+                        iconCategory in
+                        Section {
+                            ForEach(Array(icons[iconCategory]!), id: \.self) {
+                                icon in
+                                Button {
+                                    iconName = icon
+                                    dismiss()
+                                } label: {
+                                    Image(systemName: icon)
+                                        .renderingMode(.original)
+                                        .symbolRenderingMode(.hierarchical)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding(16)
+                                }
+                                .foregroundColor(.primary)
+                            }
+                        } header: {
+                            HStack {
+                                Text(iconCategory.capitalized)
+                                    .font(.title2)
+                                    .fontWeight(.bold)
+                                    .padding(.horizontal, 15)
+                                Spacer()
+                            }
                         }
-                        .foregroundColor(.primary)
                     }
                 }
             }
             .padding(.top, 16)
-            #if os(iOS)
+#if os(iOS)
             .navigationTitle("Choose Icon")
             .navigationBarTitleDisplayMode(.automatic)
-            #endif
+#endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(role: .cancel) {
@@ -116,6 +65,32 @@ internal struct IconPicker: View {
                     }
                 }
             }
+            .onAppear {
+                loadIcons()
+            }
+            .alert("Loading error", isPresented: $errLoadingIconsShown) {
+                Button("Retry") { loadIcons() }
+            } message: {
+                Text("There's been an error loading the icons from disk")
+            }
+        }
+    }
+
+    private func loadIcons() {
+        do {
+            let path = Bundle.main.path(forResource: "icons", ofType: "json")
+            let data = try Data(contentsOf: URL(filePath: path!), options: .mappedIfSafe)
+            let json = try JSONSerialization.jsonObject(with: data, options: .topLevelDictionaryAssumed) as! [String : [String]]
+            for iconCategory in json.keys {
+                if !icons.keys.contains(iconCategory) {
+                    icons[iconCategory] = []
+                }
+                for icon in json[iconCategory]! {
+                    icons[iconCategory]!.append(icon)
+                }
+            }
+        } catch {
+            errLoadingIconsShown.toggle()
         }
     }
 }

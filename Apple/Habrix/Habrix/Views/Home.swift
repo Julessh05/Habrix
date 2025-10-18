@@ -10,7 +10,7 @@
 import SwiftUI
 import SwiftData
 
-struct Home: View {
+internal struct Home: View {
     @Environment(\.modelContext) private var modelContext
 
     @Query private var habits: [Habit]
@@ -21,54 +21,54 @@ struct Home: View {
 
     @State private var detailsShown : Bool = false
 
+    @State private var searchText : String = ""
+
     var body: some View {
-        NavigationSplitView {
-            TabView {
-                Tab("Overview", systemImage: "list.bullet") {
-                    habitOverview()
-                }
-                Tab("Timeline", systemImage: "clock") {
-                    timelineView()
-                }
-                Tab("Calendar", systemImage: "calendar") {
-                    calendarView()
-                }
-                Tab("Search", systemImage: "magnifyingglass", role: .search) {
-                    SearchView()
-                }
+        // https://nilcoalescing.com/blog/SwiftUISearchEnhancementsIniOSAndiPadOS26/
+        TabView {
+            Tab("Overview", systemImage: "list.bullet") {
+                habitOverview()
             }
-            .tabBarMinimizeBehavior(.onScrollDown)
-            .tabViewSearchActivation(.searchTabSelection)
-            .popover(isPresented: $addShown) {
-                EditHabit()
+            Tab("Timeline", systemImage: "clock") {
+                timelineView()
             }
+            Tab("Calendar", systemImage: "calendar") {
+                calendarView()
+            }
+            Tab("Search", systemImage: "magnifyingglass", role: .search) {
+                SearchView()
+            }
+        }
+        .searchable(text: $searchText, placement: .automatic, prompt: "Habits, dates or more...")
+        .searchDictationBehavior(.inline(activation: .onSelect))
+        .tabBarMinimizeBehavior(.onScrollDown)
+        .tabViewSearchActivation(.searchTabSelection)
+        .popover(isPresented: $addShown) {
+            EditHabit()
+        }
 #if os(macOS)
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
+        .navigationSplitViewColumnWidth(min: 180, ideal: 200)
 #endif
 #if os(iOS)
-            .navigationTitle("Habits")
-            .navigationBarTitleDisplayMode(.automatic)
+        .navigationTitle("Habits")
+        .navigationBarTitleDisplayMode(.automatic)
 #endif
-            .toolbar {
+        .toolbar {
 #if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
+            }
 #endif
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        addShown.toggle()
-                    } label: {
-                        Label("Add habit", systemImage: "plus")
-                    }
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    addShown.toggle()
+                } label: {
+                    Label("Add habit", systemImage: "plus")
                 }
             }
-            .popover(isPresented: $detailsShown) {
-                HabitDetails(habit: $selectedHabit)
-            }
-        } detail: {
-            // TODO: add detail view for iPad and mac
-            Text("Select an item")
+        }
+        .popover(isPresented: $detailsShown) {
+            HabitDetails(habit: $selectedHabit)
         }
     }
 
@@ -106,22 +106,11 @@ struct Home: View {
         if habits.isEmpty {
             emptyView()
         } else {
-            List {
-                ForEach(habits) {
-                    habit in
-                    habitContainer(habit)
-                }
-                // TODO: implement confirm dialog on delete
-                .onDelete(perform: deleteHabit)
-                .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                    Button {
-                        // TODO: implement done
-                    } label: {
-                        Label("Mark as done", systemImage: "checkmark")
-                    }
-                    .tint(.accentColor)
-                }
-            }
+            HabitOverview(
+                habits: habits,
+                selectedHabit: $selectedHabit,
+                detailsShown: $detailsShown
+            )
         }
     }
 
@@ -130,8 +119,11 @@ struct Home: View {
         if habits.isEmpty {
             emptyView()
         } else {
-            List {
-            }
+            TimelineView(
+                habits: habits,
+                selectedHabit: $selectedHabit,
+                detailsShown: $detailsShown
+            )
         }
     }
 
@@ -140,42 +132,7 @@ struct Home: View {
         if habits.isEmpty {
             emptyView()
         } else {
-            LazyVGrid(columns: [GridItem(), GridItem(), GridItem()], pinnedViews: .sectionHeaders) {
-
-            }
-        }
-    }
-
-    @ViewBuilder
-    private func habitContainer(_ habit : Habit) -> some View {
-        Button {
-            selectedHabit = habit
-            detailsShown.toggle()
-        } label: {
-            HStack {
-                Image(systemName: habit.iconName)
-                Text(habit.name)
-            }
-            .foregroundStyle(.foreground)
-        }
-    }
-
-    @ViewBuilder
-    private func habitExecutionContianer(_ habit : Habit) -> some View {
-        Button {
-
-        } label: {
-            HStack {
-            }
-        }
-    }
-
-    private func deleteHabit(at offset: IndexSet) {
-        withAnimation {
-            for index in offset {
-                HabitHelper.deleteExecutions(habits[index], modelContext: modelContext)
-                modelContext.delete(habits[index])
-            }
+            CalendarView()
         }
     }
 }
