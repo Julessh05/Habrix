@@ -45,6 +45,8 @@ struct HabitDetails: View {
                     detailsRow(text: "Start", value: habit?.startDate.description ?? HabitDetails.loadingTag)
                     if habit?.endDate != nil {
                         detailsRow(text: "End", value: habit?.endDate?.description ?? HabitDetails.loadingTag)
+                    } else {
+                        detailsRow(text: ("End"), value: "No end scheduled")
                     }
                 } header: {
                     Text("Limits")
@@ -80,9 +82,9 @@ struct HabitDetails: View {
                 EditHabit($habit)
             }
             .onAppear {
-                let futureSlice = habit?.executions.filter { $0.timestamp > Date.now } ?? []
+                let futureSlice = habit?.executions?.filter { $0.timestamp > Date.now } ?? []
                 futureExecutions = Array(futureSlice.prefix(10))
-                let pastSlice = habit?.executions.filter { $0.timestamp <= Date.now } ?? []
+                let pastSlice = habit?.executions?.filter { $0.timestamp <= Date.now } ?? []
                 pastExecutions = Array(pastSlice.prefix(10))
             }
             #if os(iOS)

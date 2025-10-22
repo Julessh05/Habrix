@@ -12,11 +12,11 @@ struct HabitOverview: View {
 
     @Environment(\.modelContext) private var modelContext
 
-    internal var habits : [Habit]
+    @Query private var habits : [Habit]
 
-    @Binding internal var selectedHabit : Habit?
+    @State private var selectedHabit : Habit?
 
-    @Binding internal var detailsShown : Bool
+    @State private var detailsShown : Bool = false
 
     var body: some View {
         NavigationSplitView {
@@ -36,8 +36,13 @@ struct HabitOverview: View {
                     .tint(.accentColor)
                 }
             }
+            .popover(isPresented: $detailsShown) {
+                HabitDetails(habit: $selectedHabit)
+            }
             .navigationTitle("Habits")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.automatic)
+            #endif
         } detail: {
             
         }
@@ -68,15 +73,5 @@ struct HabitOverview: View {
 }
 
 #Preview {
-    @Previewable @State var habits : [Habit] = []
-
-    @Previewable @State var selectedHabit : Habit? = nil
-
-    @Previewable @State var detailsShown : Bool = false
-
-    HabitOverview(
-        habits: habits,
-        selectedHabit: $selectedHabit,
-        detailsShown: $detailsShown
-    )
+    HabitOverview()
 }

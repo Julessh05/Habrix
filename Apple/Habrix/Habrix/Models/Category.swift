@@ -11,9 +11,11 @@ import SwiftData
 @Model
 internal class Category {
 
-    @Attribute(.unique, .allowsCloudEncryption) internal var name : String
+    @Attribute(.allowsCloudEncryption) internal var name : String = "CATEGORY DEFAULT NAME"
 
     internal static var empty : Category  = Category(name: "EMPTY")
+
+    internal var habits : [Habit]? = []
 
     internal init(name : String) {
         self.name = name

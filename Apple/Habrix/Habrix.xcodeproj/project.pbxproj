@@ -7,11 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841D28F22EA8C4D30059E440 /* Habrix-Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 841D28D22EA8C4D20059E440 /* Habrix-Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		84749C6E2E966CAB002DEE92 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = 84749C6D2E966CAB002DEE92 /* Documentation.docc */; };
 		84749CA02E9FA100002DEE92 /* icons.json in Resources */ = {isa = PBXBuildFile; fileRef = 84749C9F2E9FA100002DEE92 /* icons.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		841D28DF2EA8C4D30059E440 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84C259942E9040900051D5A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 841D28D12EA8C4D20059E440;
+			remoteInfo = "Habrix-Watch Watch App";
+		};
+		841D28E92EA8C4D30059E440 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84C259942E9040900051D5A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 841D28D12EA8C4D20059E440;
+			remoteInfo = "Habrix-Watch Watch App";
+		};
+		841D28F02EA8C4D30059E440 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84C259942E9040900051D5A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 841D28D12EA8C4D20059E440;
+			remoteInfo = "Habrix-Watch Watch App";
+		};
 		84C259AE2E9040910051D5A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84C259942E9040900051D5A9 /* Project object */;
@@ -28,7 +50,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		841D28F62EA8C4D30059E440 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolder = Product;
+			files = (
+				841D28F22EA8C4D30059E440 /* Habrix-Watch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		841D28D22EA8C4D20059E440 /* Habrix-Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Habrix-Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		841D28DE2EA8C4D30059E440 /* Habrix-Watch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Habrix-Watch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		841D28E82EA8C4D30059E440 /* Habrix-Watch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Habrix-Watch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84749C6D2E966CAB002DEE92 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		84749C9E2E9FA100002DEE92 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/icons.json; sourceTree = "<group>"; };
 		84749CA12E9FA105002DEE92 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = de; path = de.lproj/icons.json; sourceTree = "<group>"; };
@@ -48,6 +85,21 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		841D28D32EA8C4D20059E440 /* Habrix-Watch Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Habrix-Watch Watch App";
+			sourceTree = "<group>";
+		};
+		841D28E12EA8C4D30059E440 /* Habrix-Watch Watch AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Habrix-Watch Watch AppTests";
+			sourceTree = "<group>";
+		};
+		841D28EB2EA8C4D30059E440 /* Habrix-Watch Watch AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Habrix-Watch Watch AppUITests";
+			sourceTree = "<group>";
+		};
 		84C2599E2E9040900051D5A9 /* Habrix */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -69,6 +121,21 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		841D28CF2EA8C4D20059E440 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		841D28DB2EA8C4D30059E440 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		841D28E52EA8C4D30059E440 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
 		84C259992E9040900051D5A9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
@@ -95,6 +162,9 @@
 				84749C6D2E966CAB002DEE92 /* Documentation.docc */,
 				84C259B02E9040910051D5A9 /* HabrixTests */,
 				84C259BA2E9040910051D5A9 /* HabrixUITests */,
+				841D28D32EA8C4D20059E440 /* Habrix-Watch Watch App */,
+				841D28E12EA8C4D30059E440 /* Habrix-Watch Watch AppTests */,
+				841D28EB2EA8C4D30059E440 /* Habrix-Watch Watch AppUITests */,
 				84C2599D2E9040900051D5A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,6 +175,9 @@
 				84C2599C2E9040900051D5A9 /* Habrix.app */,
 				84C259AD2E9040910051D5A9 /* HabrixTests.xctest */,
 				84C259B72E9040910051D5A9 /* HabrixUITests.xctest */,
+				841D28D22EA8C4D20059E440 /* Habrix-Watch Watch App.app */,
+				841D28DE2EA8C4D30059E440 /* Habrix-Watch Watch AppTests.xctest */,
+				841D28E82EA8C4D30059E440 /* Habrix-Watch Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,6 +185,66 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		841D28D12EA8C4D20059E440 /* Habrix-Watch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 841D28F32EA8C4D30059E440 /* Build configuration list for PBXNativeTarget "Habrix-Watch Watch App" */;
+			buildPhases = (
+				841D28CE2EA8C4D20059E440 /* Sources */,
+				841D28CF2EA8C4D20059E440 /* Frameworks */,
+				841D28D02EA8C4D20059E440 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				841D28D32EA8C4D20059E440 /* Habrix-Watch Watch App */,
+			);
+			name = "Habrix-Watch Watch App";
+			productName = "Habrix-Watch Watch App";
+			productReference = 841D28D22EA8C4D20059E440 /* Habrix-Watch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		841D28DD2EA8C4D30059E440 /* Habrix-Watch Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 841D28F72EA8C4D30059E440 /* Build configuration list for PBXNativeTarget "Habrix-Watch Watch AppTests" */;
+			buildPhases = (
+				841D28DA2EA8C4D30059E440 /* Sources */,
+				841D28DB2EA8C4D30059E440 /* Frameworks */,
+				841D28DC2EA8C4D30059E440 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				841D28E02EA8C4D30059E440 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				841D28E12EA8C4D30059E440 /* Habrix-Watch Watch AppTests */,
+			);
+			name = "Habrix-Watch Watch AppTests";
+			productName = "Habrix-Watch Watch AppTests";
+			productReference = 841D28DE2EA8C4D30059E440 /* Habrix-Watch Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		841D28E72EA8C4D30059E440 /* Habrix-Watch Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 841D28FA2EA8C4D30059E440 /* Build configuration list for PBXNativeTarget "Habrix-Watch Watch AppUITests" */;
+			buildPhases = (
+				841D28E42EA8C4D30059E440 /* Sources */,
+				841D28E52EA8C4D30059E440 /* Frameworks */,
+				841D28E62EA8C4D30059E440 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				841D28EA2EA8C4D30059E440 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				841D28EB2EA8C4D30059E440 /* Habrix-Watch Watch AppUITests */,
+			);
+			name = "Habrix-Watch Watch AppUITests";
+			productName = "Habrix-Watch Watch AppUITests";
+			productReference = 841D28E82EA8C4D30059E440 /* Habrix-Watch Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		84C2599B2E9040900051D5A9 /* Habrix */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84C259C02E9040910051D5A9 /* Build configuration list for PBXNativeTarget "Habrix" */;
@@ -119,8 +252,12 @@
 				84C259982E9040900051D5A9 /* Sources */,
 				84C259992E9040900051D5A9 /* Frameworks */,
 				84C2599A2E9040900051D5A9 /* Resources */,
+				841D28F62EA8C4D30059E440 /* Embed Watch Content */,
 			);
 			buildRules = (
+			);
+			dependencies = (
+				841D28F12EA8C4D30059E440 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				84C2599E2E9040900051D5A9 /* Habrix */,
@@ -182,6 +319,17 @@
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
+					841D28D12EA8C4D20059E440 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+					841D28DD2EA8C4D30059E440 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = 841D28D12EA8C4D20059E440;
+					};
+					841D28E72EA8C4D30059E440 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = 841D28D12EA8C4D20059E440;
+					};
 					84C2599B2E9040900051D5A9 = {
 						CreatedOnToolsVersion = 26.0.1;
 					};
@@ -213,11 +361,29 @@
 				84C2599B2E9040900051D5A9 /* Habrix */,
 				84C259AC2E9040910051D5A9 /* HabrixTests */,
 				84C259B62E9040910051D5A9 /* HabrixUITests */,
+				841D28D12EA8C4D20059E440 /* Habrix-Watch Watch App */,
+				841D28DD2EA8C4D30059E440 /* Habrix-Watch Watch AppTests */,
+				841D28E72EA8C4D30059E440 /* Habrix-Watch Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		841D28D02EA8C4D20059E440 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		841D28DC2EA8C4D30059E440 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		841D28E62EA8C4D30059E440 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
 		84C2599A2E9040900051D5A9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
@@ -237,6 +403,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		841D28CE2EA8C4D20059E440 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		841D28DA2EA8C4D30059E440 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		841D28E42EA8C4D30059E440 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
 		84C259982E9040900051D5A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
@@ -256,6 +437,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		841D28E02EA8C4D30059E440 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 841D28D12EA8C4D20059E440 /* Habrix-Watch Watch App */;
+			targetProxy = 841D28DF2EA8C4D30059E440 /* PBXContainerItemProxy */;
+		};
+		841D28EA2EA8C4D30059E440 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 841D28D12EA8C4D20059E440 /* Habrix-Watch Watch App */;
+			targetProxy = 841D28E92EA8C4D30059E440 /* PBXContainerItemProxy */;
+		};
+		841D28F12EA8C4D30059E440 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 841D28D12EA8C4D20059E440 /* Habrix-Watch Watch App */;
+			targetProxy = 841D28F02EA8C4D30059E440 /* PBXContainerItemProxy */;
+		};
 		84C259AF2E9040910051D5A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 84C2599B2E9040900051D5A9 /* Habrix */;
@@ -281,6 +477,165 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		841D28F42EA8C4D30059E440 /* Debug configuration for PBXNativeTarget "Habrix-Watch Watch App" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q87UDX5898;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Habrix-Watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = dev.jules.Habrix;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.jules.Habrix.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		841D28F52EA8C4D30059E440 /* Release configuration for PBXNativeTarget "Habrix-Watch Watch App" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q87UDX5898;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Habrix-Watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = dev.jules.Habrix;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.jules.Habrix.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		841D28F82EA8C4D30059E440 /* Debug configuration for PBXNativeTarget "Habrix-Watch Watch AppTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q87UDX5898;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.jules.Habrix-Watch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habrix-Watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Habrix-Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		841D28F92EA8C4D30059E440 /* Release configuration for PBXNativeTarget "Habrix-Watch Watch AppTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q87UDX5898;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.jules.Habrix-Watch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habrix-Watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Habrix-Watch Watch App";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		841D28FB2EA8C4D30059E440 /* Debug configuration for PBXNativeTarget "Habrix-Watch Watch AppUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q87UDX5898;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.jules.Habrix-Watch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Habrix-Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		841D28FC2EA8C4D30059E440 /* Release configuration for PBXNativeTarget "Habrix-Watch Watch AppUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q87UDX5898;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.jules.Habrix-Watch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Habrix-Watch Watch App";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
 		84C259C12E9040910051D5A9 /* Debug configuration for PBXNativeTarget "Habrix" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -307,6 +662,7 @@
 				INFOPLIST_FILE = Habrix/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Habrix;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "Habrix needs access to your calendar, if you wish to sync your habits and executions to your calendar";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -372,6 +728,7 @@
 				INFOPLIST_FILE = Habrix/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Habrix;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "Habrix needs access to your calendar, if you wish to sync your habits and executions to your calendar";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -636,6 +993,30 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		841D28F32EA8C4D30059E440 /* Build configuration list for PBXNativeTarget "Habrix-Watch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				841D28F42EA8C4D30059E440 /* Debug configuration for PBXNativeTarget "Habrix-Watch Watch App" */,
+				841D28F52EA8C4D30059E440 /* Release configuration for PBXNativeTarget "Habrix-Watch Watch App" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		841D28F72EA8C4D30059E440 /* Build configuration list for PBXNativeTarget "Habrix-Watch Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				841D28F82EA8C4D30059E440 /* Debug configuration for PBXNativeTarget "Habrix-Watch Watch AppTests" */,
+				841D28F92EA8C4D30059E440 /* Release configuration for PBXNativeTarget "Habrix-Watch Watch AppTests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		841D28FA2EA8C4D30059E440 /* Build configuration list for PBXNativeTarget "Habrix-Watch Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				841D28FB2EA8C4D30059E440 /* Debug configuration for PBXNativeTarget "Habrix-Watch Watch AppUITests" */,
+				841D28FC2EA8C4D30059E440 /* Release configuration for PBXNativeTarget "Habrix-Watch Watch AppUITests" */,
+			);
+			defaultConfigurationName = Release;
+		};
 		84C259972E9040900051D5A9 /* Build configuration list for PBXProject "Habrix" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -11,9 +11,9 @@ import SwiftData
 @Model
 internal final class HabitExecution {
 
-    @Attribute(.allowsCloudEncryption) internal var timestamp : Date
+    @Attribute(.allowsCloudEncryption) internal var timestamp : Date = Date.now
 
-    internal var habit : Habit
+    internal var habit : Habit?
 
     @Attribute(.allowsCloudEncryption) internal var isCompleted : Bool = false
 
@@ -34,6 +34,7 @@ internal final class HabitExecution {
 extension [Habit] {
     internal func getNextExecutions() -> [Date : [HabitExecution]] {
         var res : [Date : [HabitExecution]] = [:]
+        // TODO: find cleaner solution
         for habit in self {
             if let nextExecution = habit.getNextExecution() {
                 let nextTimestamp = nextExecution.timestamp
@@ -43,6 +44,7 @@ extension [Habit] {
                 res[nextTimestamp]!.append(nextExecution)
             }
         }
-        return res
+        return Dictionary(uniqueKeysWithValues: res.sorted(by: { $0.key < $1.key }))
+        //return res.sorted(by: { $0.key < $1.key }) as [Date : [HabitExecution]]
     }
 }

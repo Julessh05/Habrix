@@ -10,21 +10,21 @@ import SwiftData
 
 @Model
 final class Habit {
-    @Attribute(.unique, .allowsCloudEncryption) internal var name : String
+    @Attribute(.allowsCloudEncryption) internal var name : String = "HABIT DEFAULT NAME"
 
-    @Attribute(.allowsCloudEncryption) internal var iconName : String
+    @Attribute(.allowsCloudEncryption) internal var iconName : String = "figure.walk"
 
-    @Attribute(.allowsCloudEncryption) internal var frequency : Frequency
+    @Attribute(.allowsCloudEncryption) internal var frequency : Frequency = Frequency.monthly
 
-    @Attribute(.allowsCloudEncryption) internal var startDate : Date
+    @Attribute(.allowsCloudEncryption) internal var startDate : Date = Date.now
 
     @Attribute(.allowsCloudEncryption) internal var endDate : Date?
 
-    @Attribute(.allowsCloudEncryption) internal var category : Category?
+    @Relationship(deleteRule: .cascade, inverse: \Category.habits) internal var category : Category?
 
     @Attribute(.allowsCloudEncryption) internal var habitDescription : String?
 
-    @Relationship(deleteRule: .cascade, inverse: \HabitExecution.habit) internal var executions : [HabitExecution] = []
+    @Relationship(deleteRule: .cascade, inverse: \HabitExecution.habit) internal var executions : [HabitExecution]? = []
 
     internal init(
         name : String,
@@ -45,6 +45,6 @@ final class Habit {
     }
 
     internal func getNextExecution() -> HabitExecution? {
-        executions.min(by: { $0.timestamp > Date.now && $1.timestamp > Date.now && $0.timestamp < $1.timestamp }) // All Dates in the future. On them, get the smallest element
+        executions!.min(by: { $0.timestamp > Date.now && $1.timestamp > Date.now && $0.timestamp < $1.timestamp }) // All Dates in the future. On them, get the smallest element
     }
 }

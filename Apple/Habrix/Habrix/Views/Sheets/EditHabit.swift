@@ -80,7 +80,7 @@ internal struct EditHabit: View {
                         Picker(selection: $frequency) {
                             ForEach(Frequency.allCases) {
                                 f in
-                                Text(f.rawValue).tag(f)
+                                Text(f.rawValue.capitalized).tag(f)
                             }
                         } label: {
                             Text("Frequency")
