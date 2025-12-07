@@ -161,6 +161,7 @@ internal struct EditHabit: View {
             frequency: frequency,
             startDate: startDate,
             endDate: useEndDate ? endDate : nil,
+//            duration: nil,
             // TODO: add category (error was that category should be unique)
             category: nil,
             description: description.isEmpty ? nil : description

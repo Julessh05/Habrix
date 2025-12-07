@@ -13,10 +13,6 @@ import SwiftData
 internal struct Home: View {
     @Environment(\.modelContext) private var modelContext
 
-    @Query private var habits: [Habit]
-
-    @State private var addShown : Bool = false
-
     @State private var searchText : String = ""
 
     var body: some View {
@@ -32,7 +28,6 @@ internal struct Home: View {
                 SearchView()
             }
         }
-        .searchable(text: $searchText, placement: .automatic, prompt: "Habits, dates or more...")
 #if os(iOS)
         .searchDictationBehavior(.inline(activation: .onSelect))
         .tabBarMinimizeBehavior(.onScrollDown)

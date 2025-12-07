@@ -26,7 +26,6 @@ abstract class HabitsDatabase : RoomDatabase() {
                     .also {
                         Instance = it
                     }
-
             }
         }
     }

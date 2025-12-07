@@ -20,6 +20,8 @@ final class Habit {
 
     @Attribute(.allowsCloudEncryption) internal var endDate : Date?
 
+//    @Attribute(.allowsCloudEncryption) internal var duration : Int?
+
     @Relationship(deleteRule: .cascade, inverse: \Category.habits) internal var category : Category?
 
     @Attribute(.allowsCloudEncryption) internal var habitDescription : String?
@@ -32,6 +34,7 @@ final class Habit {
         frequency : Frequency,
         startDate : Date = Date.now,
         endDate : Date? = nil,
+//        duration : Int? = nil,
         category : Category? = nil,
         description : String? = nil
     ) {
@@ -40,6 +43,7 @@ final class Habit {
         self.frequency = frequency
         self.startDate = startDate
         self.endDate = endDate
+//        self.duration = duration
         self.category = category
         self.habitDescription = description
     }

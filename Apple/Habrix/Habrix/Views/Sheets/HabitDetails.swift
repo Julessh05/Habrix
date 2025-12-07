@@ -36,7 +36,7 @@ struct HabitDetails: View {
                     VStack(alignment: .leading) {
                         Text("Description")
                         Text(habit?.habitDescription ?? "No description provided")
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(.secondary)
                     }
                 } header: {
                     Text("Details")
@@ -116,7 +116,7 @@ struct HabitDetails: View {
             Text(text)
             Spacer()
             Text(value)
-                .foregroundStyle(.gray)
+                .foregroundStyle(.secondary)
         }
     }
 

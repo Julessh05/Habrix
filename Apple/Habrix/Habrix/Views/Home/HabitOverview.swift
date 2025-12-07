@@ -19,38 +19,35 @@ struct HabitOverview: View {
     @State private var detailsShown : Bool = false
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(habits) {
-                    habit in
-                    habitContainer(habit)
-                }
-                // TODO: implement confirm dialog on delete
-                .onDelete(perform: deleteHabit)
-                .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                    Button {
-                        // TODO: implement done
-                    } label: {
-                        Label("Mark as done", systemImage: "checkmark")
-                    }
-                    .tint(.accentColor)
-                }
+        List {
+            ForEach(habits) {
+                habit in
+                habitContainer(habit)
             }
-            .popover(isPresented: $detailsShown) {
-                HabitDetails(habit: $selectedHabit)
+            // TODO: implement confirm dialog on delete
+            .onDelete(perform: deleteHabit)
+            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                Button {
+                    // TODO: implement done
+                } label: {
+                    Label("Mark as done", systemImage: "checkmark")
+                }
+                .tint(.accentColor)
             }
-            .navigationTitle("Habits")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.automatic)
-            #endif
-        } detail: {
-            
         }
+        .popover(isPresented: $detailsShown) {
+            HabitDetails(habit: $selectedHabit)
+        }
+        .navigationTitle("Habits")
+#if os(iOS)
+        .navigationBarTitleDisplayMode(.automatic)
+#endif
     }
 
     private func deleteHabit(at offset: IndexSet) {
         withAnimation {
             for index in offset {
+                selectedHabit = nil
                 HabitHelper.deleteExecutions(habits[index], modelContext: modelContext)
                 modelContext.delete(habits[index])
             }
