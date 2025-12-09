@@ -28,6 +28,9 @@ struct HabrixApp: App {
     var body: some Scene {
         WindowGroup {
             Home()
+                .onAppear {
+                    SettingsHelper.loadSettings()
+                }
         }
         .modelContainer(sharedModelContainer)
     }

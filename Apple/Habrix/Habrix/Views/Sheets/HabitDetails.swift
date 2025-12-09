@@ -6,18 +6,38 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HabitDetails: View {
+
+    @Environment(\.dismiss) private var dismiss
+
+    @Environment(\.modelContext) private var modelContext
 
     @Binding internal var habit : Habit?
 
     private static let loadingTag : String = "Loading..."
+
+    @State private var futureExecutions : [HabitExecution] = []
+
+    @State private var pastExecutions : [HabitExecution] = []
+
+    @State private var editShown : Bool = false
 
     var body: some View {
         NavigationStack {
             List {
                 Section {
                     detailsRow(text: "Name", value: habit?.name ?? HabitDetails.loadingTag)
+                    detailsRow(
+                        text: "Frequency",
+                        value: habit?.frequency.rawValue.capitalized ?? HabitDetails.loadingTag
+                    )
+                    VStack(alignment: .leading) {
+                        Text("Description")
+                        Text(habit?.habitDescription ?? "No description provided")
+                            .foregroundStyle(.secondary)
+                    }
                 } header: {
                     Text("Details")
                 }
@@ -25,31 +45,68 @@ struct HabitDetails: View {
                     detailsRow(text: "Start", value: habit?.startDate.description ?? HabitDetails.loadingTag)
                     if habit?.endDate != nil {
                         detailsRow(text: "End", value: habit?.endDate?.description ?? HabitDetails.loadingTag)
+                    } else {
+                        detailsRow(text: ("End"), value: "No end scheduled")
                     }
                 } header: {
                     Text("Limits")
                 }
                 Section {
                     Button {
-
+                        markNextExecutionAsDone()
                     } label: {
                         Label("Mark next execution as done", systemImage: "checkmark")
                     }
-                    ForEach(habit?.executions ?? []) {
+                    ForEach(futureExecutions) {
                         execution in
                         Text(execution.timestamp.description)
                     }
-                    // Section for next executions
                 } header: {
                     Text("Executions")
                 } footer: {
-                    Text("The next <X> executions are shown here. If the habit does not end, new ones will be scheduled automatically.")
+                    Text("The next 10 due dates are shown here. If the habit does not end, new ones will be scheduled automatically.")
+                }
+                Section {
+                    ForEach(pastExecutions) {
+                        execution in
+                        Label(execution.timestamp.description, systemImage: execution.isCompleted ? "checkmark" : "xmark")
+                            .foregroundStyle(.primary)
+                    }
+                } header: {
+                    Text("Past executions")
+                } footer: {
+                    Text("The past 10 due dates of this habit")
                 }
             }
+            .popover(isPresented: $editShown) {
+                EditHabit($habit)
+            }
+            .onAppear {
+                let futureSlice = habit?.executions?.filter { $0.timestamp > Date.now } ?? []
+                futureExecutions = Array(futureSlice.prefix(10))
+                let pastSlice = habit?.executions?.filter { $0.timestamp <= Date.now } ?? []
+                pastExecutions = Array(pastSlice.prefix(10))
+            }
             #if os(iOS)
-            .navigationTitle(habit?.name ?? "Error")
+            .navigationTitle(habit?.name ?? HabitDetails.loadingTag)
             .navigationBarTitleDisplayMode(.automatic)
             #endif
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(role: .close) {
+                        dismiss()
+                    } label: {
+                        Label("Cancel", systemImage: "xmark")
+                    }
+                }
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        editShown.toggle()
+                    } label: {
+                        Label("Edit", systemImage: "pencil")
+                    }
+                }
+            }
         }
     }
 
@@ -59,8 +116,16 @@ struct HabitDetails: View {
             Text(text)
             Spacer()
             Text(value)
-                .foregroundStyle(.gray)
+                .foregroundStyle(.secondary)
         }
+    }
+
+    private func markNextExecutionAsDone() {
+        let nextExecution : HabitExecution? = habit!.getNextExecution()
+        if nextExecution != nil {
+            nextExecution!.markAsDone()
+        }
+        HabitHelper.createExecusions(habit!, modelContext: modelContext)
     }
 }
 

@@ -19,4 +19,19 @@ internal enum Frequency : String, RawRepresentable, Codable, CaseIterable, Ident
     case yearly
     /// Custom with values month, week, days and hours
     //case custom(Int, Int, Int, Int)
+
+    internal func getCalendarComponent() -> Calendar.Component {
+        switch self {
+        case .hourly:
+            return .hour
+        case .daily:
+            return .day
+        case .weekly:
+            return .weekOfYear
+        case .monthly:
+            return .month
+        case .yearly:
+            return .year
+        }
+    }
 }

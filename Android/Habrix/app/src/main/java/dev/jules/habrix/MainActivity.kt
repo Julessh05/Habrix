@@ -1,4 +1,4 @@
-package dev.jules.habitrack
+package dev.jules.habrix
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
