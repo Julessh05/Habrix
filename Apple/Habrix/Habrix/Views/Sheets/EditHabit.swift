@@ -40,6 +40,8 @@ internal struct EditHabit: View {
 
     @State private var editMode : Bool
 
+    @Environment(\.colorScheme) private var colorScheme
+
     private let habit : Binding<Habit?>
 
     internal init() {
@@ -84,6 +86,7 @@ internal struct EditHabit: View {
                             }
                         } label: {
                             Text("Frequency")
+                                .foregroundStyle(colorScheme == .dark ? .white : .black)
                         }
                         Button {
                             iconPickerShown.toggle()
@@ -99,17 +102,22 @@ internal struct EditHabit: View {
                             .lineLimit(3...5)
                     } header: {
                         Text("General Data")
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                     }
                     Section {
                         DatePicker("Start", selection: $startDate, displayedComponents: [.date, .hourAndMinute])
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                         Toggle("End on some date", isOn: $useEndDate)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                         if (useEndDate) {
                             DatePicker("End", selection: $endDate, displayedComponents: [.date, .hourAndMinute])
                         }
                     } header: {
                         Text("Time")
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                     } footer: {
                         Text("If no end date is set, the habit will always renew until manually stopped or deleted.")
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                     }
                     .datePickerStyle(.automatic)
                 }
