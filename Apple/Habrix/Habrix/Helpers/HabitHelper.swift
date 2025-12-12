@@ -8,9 +8,12 @@
 import Foundation
 import SwiftData
 
+/// Helper class for habits to capture all methods related to habit organistaion
 internal class HabitHelper {
 
     /// checks the saved and scheduled executions for a habit and created new ones if necessary
+    /// - Parameter habit: The habit to create executions for
+    /// - Parameter modelContext: SwiftData content to work in
     internal static func createExecusions(_ habit : Habit, modelContext : ModelContext) {
         let count = habit.executions!.count(where: { $0.timestamp > Date.now })
         guard count  < 100 else { return /* Enough executions cached */ }
@@ -31,6 +34,9 @@ internal class HabitHelper {
         }
     }
 
+    /// Deletes all the execution for the specified habit
+    /// - Parameter habit: The habit to delete the executions for
+    /// - Parameter modelContext: SwiftData content to work in
     internal static func deleteExecutions(_ habit : Habit, modelContext : ModelContext) {
         for execution in habit.executions! {
             modelContext.delete(execution)

@@ -7,11 +7,20 @@
 
 import Foundation
 
+/// Helper class for staticstics related actions and background tasks
 internal struct StatisticsHelper {
 
 #warning("Method unfinished - still partly returning nonsense")
-    // TODO: execution.timestamp == Date.now does not work, because it includes the timestamp and not only day
+    /**
+     Calculates and creates the statistics based on the passed habits list. For most accurate statistics, pass all habits.
+     Currently the following statistics are calculated:
+     - executions completed today
+     - current streak in days
+     - Parameter habits: The list of habits to calculate statistics on
+     - Returns: A `statistics` object with statics for the passed habits
+     */
     internal static func getStatistics(habits : [Habit]) -> Statistics {
+        // TODO: execution.timestamp == Date.now does not work, because it includes the timestamp and not only day
         let habitsDueToday = habits.filter {
             habit in
             habit.executions!.contains(where: {
