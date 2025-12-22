@@ -51,32 +51,32 @@ struct HabitDetails: View {
                 } header: {
                     Text("Limits")
                 }
-                Section {
-                    Button {
-                        markNextExecutionAsDone()
-                    } label: {
-                        Label("Mark next execution as done", systemImage: "checkmark")
-                    }
-                    ForEach(futureExecutions) {
-                        execution in
-                        Text(execution.timestamp.description)
-                    }
-                } header: {
-                    Text("Executions")
-                } footer: {
-                    Text("The next 10 due dates are shown here. If the habit does not end, new ones will be scheduled automatically.")
-                }
-                Section {
-                    ForEach(pastExecutions) {
-                        execution in
-                        Label(execution.timestamp.description, systemImage: execution.isCompleted ? "checkmark" : "xmark")
-                            .foregroundStyle(.primary)
-                    }
-                } header: {
-                    Text("Past executions")
-                } footer: {
-                    Text("The past 10 due dates of this habit")
-                }
+//                Section {
+//                    Button {
+//                        markNextExecutionAsDone()
+//                    } label: {
+//                        Label("Mark next execution as done", systemImage: "checkmark")
+//                    }
+//                    ForEach(futureExecutions) {
+//                        execution in
+//                        Text(execution.timestamp.description)
+//                    }
+//                } header: {
+//                    Text("Executions")
+//                } footer: {
+//                    Text("The next 10 due dates are shown here. If the habit does not end, new ones will be scheduled automatically.")
+//                }
+//                Section {
+//                    ForEach(pastExecutions) {
+//                        execution in
+//                        Label(execution.timestamp.description, systemImage: execution.isCompleted ? "checkmark" : "xmark")
+//                            .foregroundStyle(.primary)
+//                    }
+//                } header: {
+//                    Text("Past executions")
+//                } footer: {
+//                    Text("The past 10 due dates of this habit")
+//                }
             }
             .popover(isPresented: $editShown) {
                 EditHabit($habit)
@@ -125,7 +125,13 @@ struct HabitDetails: View {
         if nextExecution != nil {
             nextExecution!.markAsDone()
         }
-        HabitHelper.createExecusions(habit!, modelContext: modelContext)
+        Task {
+            do {
+                try await HabitHelper.createExecutions(habit!, modelContext: modelContext)
+            } catch {
+                // TODO: handle error
+            }
+        }
     }
 }
 

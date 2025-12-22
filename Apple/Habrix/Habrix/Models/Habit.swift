@@ -42,6 +42,9 @@ final class Habit {
     /// This relationship has a cascade rule meaning all executions are deleted, when a habit is deleted
     @Relationship(deleteRule: .cascade, inverse: \HabitExecution.habit) internal var executions : [HabitExecution]? = []
 
+    /// Whether or not notifications for this habit should be send
+    @Attribute(.allowsCloudEncryption) internal var notify : Bool = false
+
     internal init(
         name : String,
         iconName : String,
@@ -50,7 +53,8 @@ final class Habit {
         endDate : Date? = nil,
 //        duration : Int? = nil,
         category : Category? = nil,
-        description : String? = nil
+        description : String? = nil,
+        notify : Bool = false,
     ) {
         self.name = name
         self.iconName = iconName
@@ -60,6 +64,7 @@ final class Habit {
 //        self.duration = duration
         self.category = category
         self.habitDescription = description
+        self.notify = notify
     }
 
     /// Returns the next Execution if found, nil otherwise

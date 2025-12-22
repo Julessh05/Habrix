@@ -21,9 +21,9 @@ internal struct Home: View {
             Tab("Timeline", systemImage: "clock") {
                 HabitsTimelineView()
             }
-            Tab("Calendar", systemImage: "calendar") {
-                CalendarView()
-            }
+//            Tab("Calendar", systemImage: "calendar") {
+//                CalendarView()
+//            }
             Tab("Statistics", systemImage: "chart.bar") {
                 StatisticsView()
             }

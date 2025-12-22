@@ -10,38 +10,63 @@
 import SwiftUI
 import SwiftData
 
+/**
+ Struct to edit or initially create habits
+ */
 internal struct EditHabit: View {
 
-    @Environment(\.dismiss) private var dismiss
-
-    @Environment(\.modelContext) private var modelContext
-
-    @Query private var categories: [Category]
-
-    @State private var name : String
-
-    @State private var description : String
-
-    @State private var iconName : String
-
-    @State private var frequency : Frequency
-
-    @State private var category : Category
-
-    @State private var iconPickerShown : Bool = false
-
-    @State private var nameEmptyDialogShown : Bool = false
-
-    @State private var startDate : Date = Date.now
-
-    @State private var useEndDate : Bool
-
-    @State private var endDate : Date
-
-    @State private var editMode : Bool
-
+    /// The current color scheme of the device environment
     @Environment(\.colorScheme) private var colorScheme
 
+    /// Dismiss function of the environment used to close this as sheet
+    @Environment(\.dismiss) private var dismiss
+
+    /// ModelContext to store new habits or changes in
+    @Environment(\.modelContext) private var modelContext
+
+    /// All categories fetched from the Model Context
+    @Query private var categories: [Category]
+
+    /// The name of the habit
+    @State private var name : String
+
+    /// Description of the habit
+    @State private var description : String
+
+    /// Icon name as String. Can only be one of the icons selected via `IconPicker`
+    @State private var iconName : String
+
+    /// The frequency in which the habit should occur
+    @State private var frequency : Frequency
+
+    /// The category this habit belongs to
+    @State private var category : Category
+
+    /// Whether the icon picker sheet is shown or not
+    @State private var iconPickerShown : Bool = false
+
+    /// Whether or not the alert dialog which states, that the name field is empy,
+    /// is shown
+    @State private var nameEmptyDialogShown : Bool = false
+
+    /// The start date of this habit
+    @State private var startDate : Date = Date.now
+
+    /// Whether this habit ends on some date
+    @State private var useEndDate : Bool
+
+    /// The end habit of this habit, if `useEndDate` is true
+    @State private var endDate : Date
+
+    /// Whether this view is used to edit or create a new habit
+    /// `false`: create new habit
+    /// `true`: edit existing habit
+    @State private var editMode : Bool
+
+    /// Whether notification for this habit should be active
+    @State private var notify : Bool
+
+    /// The habit to edit if `editMode` is set to `true`
     private let habit : Binding<Habit?>
 
     internal init() {
@@ -55,6 +80,7 @@ internal struct EditHabit: View {
         endDate = Calendar.current.date(byAdding: .year, value: 1, to: Date.now)!
         editMode = false
         habit = .constant(nil)
+        notify = false
     }
 
     internal init(_ habit : Binding<Habit?>) {
@@ -69,6 +95,7 @@ internal struct EditHabit: View {
         startDate = internalHabit.startDate
         useEndDate = internalHabit.endDate != nil
         endDate = internalHabit.endDate ?? Calendar.current.date(byAdding: .year, value: 1, to: Date.now)!
+        notify = internalHabit.notify
         editMode = true
         self.habit = habit
     }
@@ -79,6 +106,7 @@ internal struct EditHabit: View {
                 List {
                     Section {
                         TextField("Name", text: $name)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                         Picker(selection: $frequency) {
                             ForEach(Frequency.allCases) {
                                 f in
@@ -100,6 +128,7 @@ internal struct EditHabit: View {
                         TextField("Description", text: $description, axis: .vertical)
                             .multilineTextAlignment(.leading)
                             .lineLimit(3...5)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                     } header: {
                         Text("General Data")
                             .foregroundStyle(colorScheme == .dark ? .white : .black)
@@ -112,6 +141,8 @@ internal struct EditHabit: View {
                         if (useEndDate) {
                             DatePicker("End", selection: $endDate, displayedComponents: [.date, .hourAndMinute])
                         }
+                        Toggle("Send notifications", isOn: $notify)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                     } header: {
                         Text("Time")
                             .foregroundStyle(colorScheme == .dark ? .white : .black)
@@ -158,7 +189,17 @@ internal struct EditHabit: View {
         }
     }
 
+    /// Function called when editing or creation is done.
+    /// Executes the parsing and storing functions and also creates habits
+    /// and schedules notifications if wished
     private func done() {
+        Task {
+            do {
+                try await NotificationHelper.requestPermission()
+            } catch {
+                // TODO: handle error
+            }
+        }
         guard !name.isEmpty else {
             nameEmptyDialogShown.toggle()
             return
@@ -172,7 +213,8 @@ internal struct EditHabit: View {
 //            duration: nil,
             // TODO: add category (error was that category should be unique)
             category: nil,
-            description: description.isEmpty ? nil : description
+            description: description.isEmpty ? nil : description,
+            notify: notify
         )
         if habit.wrappedValue != nil {
             habit.wrappedValue = newHabit
@@ -183,7 +225,13 @@ internal struct EditHabit: View {
             }
         } else {
             modelContext.insert(newHabit)
-            HabitHelper.createExecusions(newHabit, modelContext: modelContext)
+            Task {
+                do {
+                    try await HabitHelper.createExecutions(newHabit, modelContext: modelContext)
+                } catch {
+                    // TODO: handle error
+                }
+            }
         }
         dismiss()
     }

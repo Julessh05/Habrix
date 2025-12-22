@@ -161,13 +161,13 @@ struct HabitsTimelineView: View {
         // TODO: work on return values
         if (execution.timestamp < Date.now) {
             if (execution.isCompleted) {
-                return .regular.tint(.secondary.opacity(0.5))
+                return .regular.tint(.secondary.opacity(0.3))
             } else {
-                return .regular.tint(.gray.opacity(0.6))
+                return .regular.tint(.secondary.opacity(0.5))
             }
         } else {
             if (execution.isCompleted) {
-                return .regular.tint(.secondary.opacity(0.3))
+                return .regular.tint(.secondary.opacity(0.1))
             } else {
                 return .regular.tint(.clear)
             }
